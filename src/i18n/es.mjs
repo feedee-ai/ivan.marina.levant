@@ -1,8 +1,8 @@
 export default {
   code: 'es', htmlLang: 'es', locale: 'es-ES', label: 'ES', name: 'Español', dir: '',
   meta: {
-    title: 'Levant Massage — Ivan y Marina | Masaje en Valencia, masaje a cuatro manos',
-    description: 'Masaje terapéutico, masaje profundo y masaje levantino a cuatro manos en Valencia. Tratamos la causa del dolor, no solo el síntoma. Google 5,0 · 22 reseñas. Todos los días de 10:00 a 20:00, metro Av. del Cid.',
+    title: 'Masaje terapéutico en Valencia · Ivan y Marina · Levant Massage',
+    description: 'Masaje terapéutico y de bienestar en Valencia: aliviamos el dolor de cuello, espalda y cabeza buscando la causa. Sales con el cuerpo ligero y la mente clara. Google 5,0 · 22 reseñas. Todos los días 10:00-20:00, metro Av. del Cid.',
   },
   masters: { ivan: 'Ivan', marina: 'Marina', both: 'Ivan y Marina', any: 'Me da igual' },
   mastersHint: { ivan: 'Trabajo profundo, corrección manual, yoga-masaje', marina: 'Rostro, cabeza, masaje miofascial', both: 'Masaje a cuatro manos', any: 'Elegimos según tu caso' },
@@ -12,17 +12,20 @@ export default {
     book: 'Reservar', menu: 'Menú', close: 'Cerrar', lang: 'Idioma', skip: 'Ir al contenido',
   },
   hero: {
-    lines: ['4 manos.', 'Dos mentes.', 'Un solo sistema nervioso.'],
-    lead: 'Masaje levantino de autor a cuatro manos, masaje terapéutico y trabajo facial profundo en Valencia. Ivan y Marina encuentran la causa de la tensión y la liberan con precisión, sin fuerza innecesaria.',
+    credit: 'Ivan y Marina · Valencia',
+    title: 'Un masaje que deja el cuerpo como nuevo',
+    sub: 'Masaje terapéutico y de bienestar con Ivan y Marina: quitamos el dolor y la tensión buscando la causa. Sales con el cuerpo ligero y la mente clara.',
     ctaBook: 'Elegir hora',
     ctaConsult: 'Consulta gratuita',
     slotsTitle: 'Próximos huecos libres',
+    slotsNote: 'horario de ejemplo',
     slotsAll: 'Ver agenda',
     demo: 'demo',
-    rating: '22 reseñas en Google',
-    place: 'Valencia · metro Av. del Cid',
-    hours: 'Todos los días 10:00–20:00',
-    scroll: 'Desliza',
+    altMarina: 'Marina da un masaje de espalda a un cliente en el estudio de cortinas negras',
+    altIvan: 'Ivan trabaja la pierna de una clienta en la camilla',
+  },
+  press: {
+    label: 'en Google · 22 reseñas en cuatro idiomas', prev: 'Reseña anterior', next: 'Reseña siguiente', pause: 'Pausar las reseñas', play: 'Reanudar las reseñas',
   },
   manifesto: {
     myth: 'Si duele, es que funciona',

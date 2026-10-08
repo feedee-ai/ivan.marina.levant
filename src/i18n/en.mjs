@@ -1,8 +1,8 @@
 export default {
   code: 'en', htmlLang: 'en', locale: 'en-GB', label: 'EN', name: 'English', dir: '',
   meta: {
-    title: 'Levant Massage — Ivan & Marina | Massage in Valencia, four-hands massage',
-    description: 'Therapeutic, deep-tissue and signature Levantine four-hands massage in Valencia. We treat the cause of pain, not just the symptom. Google 5.0 · 22 reviews. Daily 10:00–20:00, metro Av. del Cid.',
+    title: 'Restorative massage in Valencia · Ivan & Marina · Levant Massage',
+    description: 'Restorative and therapeutic massage in Valencia: we ease neck, back and head pain by finding the cause. You leave with a light body and a clear head. Google 5.0 · 22 reviews. Daily 10:00-20:00, metro Av. del Cid.',
   },
   masters: { ivan: 'Ivan', marina: 'Marina', both: 'Ivan & Marina', any: 'No preference' },
   mastersHint: { ivan: 'Deep work, manual correction, yoga massage', marina: 'Face, head, myofascial massage', both: 'Four-hands massage', any: 'We’ll match you to the right therapist' },
@@ -12,17 +12,20 @@ export default {
     book: 'Book', menu: 'Menu', close: 'Close', lang: 'Language', skip: 'Skip to content',
   },
   hero: {
-    lines: ['4 hands.', 'Two minds.', 'One nervous system.'],
-    lead: 'Signature Levantine four-hands massage, therapeutic massage and deep facial work in Valencia. Ivan and Marina find the cause of the tension and release it precisely, without unnecessary force.',
+    credit: 'Ivan & Marina · Valencia',
+    title: 'Massage that leaves you feeling brand new',
+    sub: 'Restorative and therapeutic massage by Ivan and Marina: we ease pain and tension by finding the cause. You walk out with a light body and a clear head.',
     ctaBook: 'Pick a time',
     ctaConsult: 'Free consultation',
     slotsTitle: 'Next free slots',
+    slotsNote: 'sample schedule',
     slotsAll: 'Full schedule',
     demo: 'demo',
-    rating: '22 reviews on Google',
-    place: 'Valencia · metro Av. del Cid',
-    hours: 'Daily 10:00–20:00',
-    scroll: 'Scroll',
+    altMarina: 'Marina giving a back massage in the black-curtained studio',
+    altIvan: 'Ivan working on a client’s leg on the massage table',
+  },
+  press: {
+    label: 'on Google · 22 reviews in four languages', prev: 'Previous review', next: 'Next review', pause: 'Pause reviews', play: 'Resume reviews',
   },
   manifesto: {
     myth: 'No pain, no gain',

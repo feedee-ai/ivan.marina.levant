@@ -6,6 +6,7 @@
 - **Прод, главный адрес** https://ivanmarinalevant.vercel.app — первая версия (до site-factory). Ветка `main`, Vercel-проект `ivan.marina.levant`. Код: `src/`, `build.mjs`, `assets/`, `vercel.json` → `dist/`.
 - **Новая версия (site-factory)** https://ivan-marina-levant-v2.vercel.app — ветка `v2`, отдельный Vercel-проект `ivan-marina-levant-v2`, noindex. Код: `site/`, `tools/`.
 - Ветка `v1` — заморожённый снимок первой версии с noindex (проект `ivan-marina-levant-v1`), не коммитить.
+- 08.10.2026 в `main` первые два блока (hero-диптих и «5,0» с ротацией отзывов) перенесены по структуре из v2 (шрифт Commissioner, палитра первой версии). Заголовок — про оздоровление («Масаж, після якого тіло як нове»), а не про 4 руки.
 
 ## Факты
 - Ниша: терапевтический массаж + авторский левантийский массаж в 4 руки.

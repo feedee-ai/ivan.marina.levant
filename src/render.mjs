@@ -42,6 +42,10 @@ export function render(t, langs, base) {
     hero: { demo: t.hero.demo },
   };
 
+  // Reviews for the rotating press quote: ones that say "I left feeling new" first, then the page language, then the rest.
+  const leadReviews = { uk: ['Lara B.', 'Наталя К.'], ru: ['Daria S.', 'Vero K.'], es: ['Liz P.', 'Antonina G.'], en: ['Hollow', 'Lesya C.'] }[t.code] || [];
+  const rank = (r) => (leadReviews.includes(r.name) ? leadReviews.indexOf(r.name) - 10 : r.lang === t.label ? 0 : 1);
+
   const langSwitch = (cls) => `
     <nav class="${cls}" aria-label="${esc(t.nav.lang)}">
       ${langs.map((l) => `<a href="${href(l.code)}" hreflang="${l.htmlLang}" lang="${l.htmlLang}" ${l.code === t.code ? 'aria-current="page"' : ''} title="${esc(l.name)}">${l.label}</a>`).join('')}
@@ -85,7 +89,8 @@ ${langs.map((l) => `<link rel="alternate" hreflang="${l.htmlLang}" href="${site.
 <meta property="og:locale" content="${t.locale.replace('-', '_')}">
 <link rel="icon" href="${base}assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${base}assets/fonts/oswald-${t.code === 'es' || t.code === 'en' ? 'latin' : 'cyrillic'}-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="${base}assets/img/tattoo-hands.webp" as="image" imagesrcset="${base}assets/img/tattoo-hands-sm.webp 760w, ${base}assets/img/tattoo-hands.webp 1440w" imagesizes="(min-width: 960px) 90vw, 220vw">
+<link rel="preload" href="${base}assets/fonts/commissioner-${t.code === 'es' || t.code === 'en' ? 'latin' : 'cyrillic'}.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="${base}assets/img/marina-back.webp" as="image" imagesrcset="${base}assets/img/marina-back-sm.webp 760w, ${base}assets/img/marina-back.webp 1440w" imagesizes="(min-width: 960px) 52vw, 100vw">
 <link rel="stylesheet" href="${base}assets/css/style.css">
 <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 </head>
@@ -124,37 +129,46 @@ ${langs.map((l) => `<link rel="alternate" hreflang="${l.htmlLang}" href="${site.
 <main id="main">
 
 <!-- HERO -->
-<section class="hero" aria-labelledby="hero-title">
-  <div class="wrap hero__in">
-    <div class="hero__copy">
-      <h1 class="hero__title" id="hero-title">
-        ${t.hero.lines.map((l, i) => `<span class="line" style="--d:${i}"><span>${l}</span></span>`).join('')}
-      </h1>
-      <p class="hero__lead">${t.hero.lead}</p>
-      <div class="hero__actions">
-        <a class="btn btn--sand" href="#booking" data-book>${icon('calendar-blank')}<span>${t.hero.ctaBook}</span></a>
-        <a class="btn btn--ghost" href="${waLink('marina', t.booking.waHello)}" target="_blank" rel="noopener">${icon('whatsapp-logo')}<span>${t.hero.ctaConsult}</span></a>
-      </div>
-      <div class="slots" data-hero-slots data-more="${esc(t.hero.slotsAll)}">
-        <div class="slots__head">
-          <span>${t.hero.slotsTitle}</span><em class="demo-tag">${t.hero.demo}</em>
-        </div>
-        <div class="slots__list" data-slots-list></div>
-      </div>
-      <ul class="hero__facts">
-        <li><a href="#reviews" class="rating">${icon('star', 'i i--star')}<strong>${t.reviews.title[0]}</strong><span>${t.hero.rating}</span></a></li>
-        <li>${icon('train')}<span>${t.hero.place}</span></li>
-        <li>${icon('clock')}<span>${t.hero.hours}</span></li>
-      </ul>
+<section class="hero hero2" aria-labelledby="hero-title">
+  <div class="hero2__stage">
+    <figure class="hero2__shot hero2__shot--a">${pic('marina-back', t.hero.altMarina, { cls: 'hero2__img', sizes: '(min-width: 960px) 52vw, 100vw', eager: true })}</figure>
+    <figure class="hero2__shot hero2__shot--b">${pic('ivan-studio', t.hero.altIvan, { cls: 'hero2__img', sizes: '(min-width: 960px) 46vw, 1px' })}</figure>
+  </div>
+  <div class="hero2__copy">
+    <p class="hero2__credit">${t.hero.credit}</p>
+    <h1 class="hero2__title" id="hero-title">${t.hero.title}</h1>
+    <p class="hero2__sub">${t.hero.sub}</p>
+    <div class="hero2__actions">
+      <a class="btn2 btn2--sand" href="#booking" data-book><span>${t.hero.ctaBook}</span>${icon('arrow-right')}</a>
+      <a class="btn2 btn2--ghost" href="${waLink('marina', t.booking.waHello)}" target="_blank" rel="noopener">${icon('whatsapp-logo')}<span>${t.hero.ctaConsult}</span></a>
     </div>
-    <figure class="hero__media">
-      <div class="cover" style="--ar:${1440 / 700}">
-        ${pic('tattoo-hands', `${t.masters.both}: ${t.services.items.four.name}`, { cls: 'hero__img', sizes: '(min-width: 960px) 90vw, 220vw', eager: true })}
-        <span class="tag-dot tag-dot--m" style="--x:50%;--y:30%" aria-hidden="true"><i></i><b>${t.masters.marina}</b></span>
-        <span class="tag-dot tag-dot--i" style="--x:41%;--y:70%" aria-hidden="true"><i></i><b>${t.masters.ivan}</b></span>
-      </div>
-      <figcaption class="hero__plaque"><span>${t.services.signature}</span><strong>${t.services.items.four.name}</strong></figcaption>
-    </figure>
+  </div>
+  <div class="showtimes" data-hero-slots data-more="${esc(t.hero.slotsAll)}">
+    <p class="showtimes__title">${t.hero.slotsTitle}<span>${t.hero.slotsNote}</span></p>
+    <div class="showtimes__list" data-slots-list aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- PRESS: rating + rotating reviews -->
+<section class="press" aria-label="${esc(t.reviews.title.join(' '))}">
+  <div class="press__score">
+    <p class="press__num">${t.code === 'en' ? site.rating.value.replace(',', '.') : site.rating.value}</p>
+    <p class="press__stars" aria-label="5/5">${icon('star', 'i press__star').repeat(5)}</p>
+    <p class="press__label">${t.press.label}</p>
+  </div>
+  <div class="press__quotes" data-quotes>
+    <div class="press__stack" aria-live="off" data-quotes-stack>
+      ${[...reviews].sort((x, y) => rank(x) - rank(y)).map((r, i) => `<figure class="press__q${r.text.length > 170 ? ' is-long' : ''}${i === 0 ? ' is-on' : ''}" lang="${{ UA: 'uk', RU: 'ru', ES: 'es', EN: 'en' }[r.lang]}" data-q${i ? ' aria-hidden="true"' : ''}>
+        <blockquote><p>${qo}${esc(r.text)}${qc}</p></blockquote>
+        <figcaption><b>${esc(r.name)}</b> · Google · ${r.ago[t.code]}</figcaption>
+      </figure>`).join('')}
+    </div>
+    <div class="press__ctrl">
+      <button class="press__btn" type="button" data-q-prev aria-label="${esc(t.press.prev)}">${icon('arrow-right', 'i i--flip')}</button>
+      <button class="press__btn" type="button" data-q-pause aria-label="${esc(t.press.pause)}" data-label-play="${esc(t.press.play)}" data-label-pause="${esc(t.press.pause)}"><span class="press__pause" aria-hidden="true"></span></button>
+      <button class="press__btn" type="button" data-q-next aria-label="${esc(t.press.next)}">${icon('arrow-right')}</button>
+      <span class="press__bar" aria-hidden="true"><i data-q-bar></i></span>
+    </div>
   </div>
 </section>
 

@@ -460,17 +460,67 @@
 
   renderAll();
 
+
+  /* ---------- Press: rotating reviews, timed by length so there is time to read ---------- */
+  const qBox = $('[data-quotes]');
+  if (qBox) {
+    const qs = $$('[data-q]', qBox);
+    const stack = $('[data-quotes-stack]', qBox);
+    const bar = $('[data-q-bar]', qBox);
+    const pauseBtn = $('[data-q-pause]', qBox);
+    let cur = 0, userPaused = false, hover = false, inView = false;
+    // ~200 words per minute plus a beat to take in the name: 6.5s for a short line, up to 16s for a long one
+    const dur = (el) => Math.min(16000, Math.max(6500, 4000 + el.textContent.trim().split(/\s+/).length * 300));
+    const restart = () => {
+      bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = '';
+      bar.style.animationDuration = `${dur(qs[cur])}ms`;
+    };
+    const show = (n) => {
+      const out = qs[cur];
+      out.classList.remove('is-on'); out.classList.add('is-leaving'); out.setAttribute('aria-hidden', 'true');
+      setTimeout(() => out.classList.remove('is-leaving'), 700);
+      cur = (n + qs.length) % qs.length;
+      qs[cur].classList.add('is-on'); qs[cur].removeAttribute('aria-hidden');
+      restart();
+    };
+    const sync = () => qBox.classList.toggle('is-paused', userPaused || hover || !inView || document.hidden);
+    bar.addEventListener('animationend', () => show(cur + 1));
+    $('[data-q-prev]', qBox).addEventListener('click', () => show(cur - 1));
+    $('[data-q-next]', qBox).addEventListener('click', () => show(cur + 1));
+    pauseBtn.addEventListener('click', () => {
+      userPaused = !userPaused;
+      pauseBtn.classList.toggle('is-play', userPaused);
+      pauseBtn.setAttribute('aria-label', userPaused ? pauseBtn.dataset.labelPlay : pauseBtn.dataset.labelPause);
+      stack.setAttribute('aria-live', userPaused ? 'polite' : 'off');
+      sync();
+    });
+    stack.addEventListener('mouseenter', () => { hover = true; sync(); });
+    stack.addEventListener('mouseleave', () => { hover = false; sync(); });
+    qBox.addEventListener('focusin', () => { hover = true; sync(); });
+    qBox.addEventListener('focusout', () => { hover = false; sync(); });
+    let sx = null;
+    stack.addEventListener('pointerdown', (e) => { sx = e.clientX; });
+    stack.addEventListener('pointerup', (e) => {
+      if (sx === null) return;
+      const dx = e.clientX - sx; sx = null;
+      if (Math.abs(dx) > 40) show(cur + (dx < 0 ? 1 : -1));
+    });
+    new IntersectionObserver(([e]) => { inView = e.isIntersecting; sync(); }, { threshold: .4 }).observe(qBox);
+    document.addEventListener('visibilitychange', sync);
+    restart(); sync();
+  }
+
   /* ---------- Hero: nearest free windows ---------- */
   const heroSlots = $('[data-slots-list]');
   if (heroSlots) {
     const found = [];
-    for (let i = 0; i < days.length && found.length < 3; i++) {
+    for (let i = 0; i < days.length && found.length < 6; i++) {
       const list = slotsFor(days[i], 'therapeutic', 'any', 60);
       // spread picks across the day instead of three neighbouring half-hours
       let lastPick = -999;
       for (const m of list) {
         if (m - lastPick >= 120) { found.push({ i, m }); lastPick = m; }
-        if (found.length >= 3 || found.filter((f) => f.i === i).length >= 2) break;
+        if (found.length >= 6 || found.filter((f) => f.i === i).length >= 2) break;
       }
     }
     heroSlots.innerHTML = found.map((f) => `<a class="slot" href="#booking" data-book data-service="therapeutic" data-day="${f.i}" data-time="${f.m}"><span>${dayLabel(days[f.i], f.i)}</span><b>${minToStr(f.m)}</b></a>`).join('')
