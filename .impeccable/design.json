@@ -1,0 +1,9 @@
+{
+  "world": "black-box stage, duet, follow-spot",
+  "theme": "dark",
+  "color": { "bg": "#0c0c0e", "bg2": "#121215", "bg3": "#19191d", "ink": "#ece7e0", "ink2": "#c3bdb5", "mute": "#918b84", "accent": "#ffae45", "accentHi": "#ffc777", "onAccent": "#160e03", "error": "#ff8a7a" },
+  "type": { "family": "Commissioner", "display": { "weight": "700-760", "axes": "FLAR 100, VOLM 40-60", "tracking": "-0.035em..-0.045em", "leading": "0.9-0.98" }, "body": { "weight": 400, "axes": "FLAR 0", "size": "17px", "leading": 1.6 } },
+  "shape": { "controls": "pill", "media": 0, "inputs": "12px" },
+  "motion": { "ui": "cubic-bezier(.23,1,.32,1) 160-300ms", "curtain": "cubic-bezier(.77,0,.175,1) 1050ms", "press": "scale(.97)" },
+  "provenance": "All photos: crops of the studio's own Instagram slides (@ivan.marina.levant), graded in tools; no generated or stock imagery."
+}
