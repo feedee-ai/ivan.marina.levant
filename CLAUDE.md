@@ -1,6 +1,11 @@
 # Levant Massage by Marina & Ivan
 
-Сайт массажного дуэта Ивана и Марины, Валенсия. Прод: https://ivanmarinalevant.vercel.app (ветка `main`, Vercel-проект `ivan.marina.levant`). Старая версия заморожена в ветке `v1` → https://ivan-marina-levant-v1.vercel.app (отдельный проект `ivan-marina-levant-v1`, noindex). В `v1` не коммитить.
+Сайт массажного дуэта Ивана и Марины, Валенсия.
+
+Версии (по решению Александра 08.10.2026 главный адрес отдан первой версии):
+- **Прод, главный адрес** https://ivanmarinalevant.vercel.app — первая версия (до site-factory). Ветка `main`, Vercel-проект `ivan.marina.levant`. Код: `src/`, `build.mjs`, `assets/`, `vercel.json` → `dist/`.
+- **Новая версия (site-factory)** https://ivan-marina-levant-v2.vercel.app — ветка `v2`, отдельный Vercel-проект `ivan-marina-levant-v2`, noindex. Код: `site/`, `tools/`.
+- Ветка `v1` — заморожённый снимок первой версии с noindex (проект `ivan-marina-levant-v1`), не коммитить.
 
 ## Факты
 - Ниша: терапевтический массаж + авторский левантийский массаж в 4 руки.
@@ -13,11 +18,10 @@
 - Кейсы: Артём 39 (1/3/5 сеансов → веломарафон 40 км), скрипачка Марина (3 сеанса за неделю), головная боль (курс).
 - Аудитория: UA/RU-эмигранты + ES/EN. Языки сайта: UA (по умолчанию), RU, ES, EN.
 
-## Как устроено
-- `site/` — готовый статический сайт (его и раздаёт Vercel, сборки на Vercel нет).
-- `tools/data.mjs` — контакты, услуги, **цены** (`price: null` → «ціна після консультації»), длительности, отзывы.
-- `tools/i18n/{uk,ru,es,en}.mjs` — все тексты. `tools/build.mjs` — шаблон страницы.
-- После правок: `node tools/build.mjs` и коммит `site/`.
+## Как устроено (main, первая версия)
+- `src/config.mjs` — контакты, услуги, **цены** (`price: null` → «ціну уточнюйте»), длительности, отзывы.
+- `src/i18n/*.mjs` — тексты, `src/render.mjs` — шаблон. После правок: `node build.mjs` и коммит страниц.
+- Новая версия (ветка `v2`): данные в `tools/data.mjs`, тексты в `tools/i18n/`, сборка `node tools/build.mjs` → `site/`.
 - Запись: демо-слоты (стабильный псевдослучайный график) → готовое сообщение в WhatsApp (Иван → его номер, остальные → Марина).
 - Дизайн: `DESIGN.md`; продукт: `PRODUCT.md`; материалы и бриф: `materials/`.
 
