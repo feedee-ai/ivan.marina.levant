@@ -3,7 +3,7 @@
 // The site then shows the price next to the service and in the booking summary.
 
 export const site = {
-  url: 'https://ivanmarinalevant.vercel.app', // production URL (canonical, hreflang, OG)
+  url: 'https://ivan-marina-levant-v2.vercel.app', // this version's own link (canonical, hreflang, OG)
   instagram: 'https://www.instagram.com/ivan.marina.levant/',
   instagramHandle: '@ivan.marina.levant',
   phones: {

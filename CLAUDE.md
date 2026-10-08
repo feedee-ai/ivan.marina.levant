@@ -1,6 +1,6 @@
 # Levant Massage by Marina & Ivan
 
-Сайт массажного дуэта Ивана и Марины, Валенсия. Прод: https://ivanmarinalevant.vercel.app (ветка `main`, Vercel-проект `ivan.marina.levant`). Старая версия заморожена в ветке `v1` → https://ivan-marina-levant-v1.vercel.app (отдельный проект `ivan-marina-levant-v1`, noindex). В `v1` не коммитить.
+Сайт массажного дуэта Ивана и Марины, Валенсия. Эта ветка (`v2`) — новая версия (site-factory) → https://ivan-marina-levant-v2.vercel.app (Vercel-проект `ivan-marina-levant-v2`, noindex). Главный адрес https://ivanmarinalevant.vercel.app по решению Александра (08.10.2026) отдаёт первую версию (ветка `main`). Чтобы вернуть новую на главный адрес: перенести `site/`, `tools/`, `vercel.json` в `main`, в `tools/data.mjs` поставить `url` главного адреса и убрать `noindex` из `tools/build.mjs`.
 
 ## Факты
 - Ниша: терапевтический массаж + авторский левантийский массаж в 4 руки.
